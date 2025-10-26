@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const testItemData = [
-        { id: 1, item_name: "Box A", current_price: 10, size: "S", stock_quantity: 10, status: "Active"},
-        { id: 2, item_name: "Box B", current_price: 20, size: "M", stock_quantity: 20, status: "Discontinued"},
-        { id: 3, item_name: "Box C", current_price: 30, size: "L", stock_quantity: 30, status: "Active"},
+        { item_id: 1, itemName: "Box A", current_price: 10, size: "S", stock_quantity: 10, status: "Active"},
+        { item_id: 2, itemName: "Box B", current_price: 20, size: "M", stock_quantity: 20, status: "Discontinued"},
+        { item_id: 3, itemName: "Box C", current_price: 30, size: "L", stock_quantity: 30, status: "Active"},
     ];
 
 var lastId = 3;
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
     const updatedItem = await req.json(); // Expect full Item with id
-    const index = testItemData.findIndex(i => i.id === updatedItem.id);
+    const index = testItemData.findIndex(i => i.item_id === updatedItem.item_id);
 
     if (index === -1) {
         return NextResponse.json({ error: "Item not found" }, { status: 404 });

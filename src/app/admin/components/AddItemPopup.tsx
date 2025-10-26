@@ -4,19 +4,22 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { Item } from "@/app/admin/types"
 
+// Base URL of your Spring Boot API for items
+const API_URL = "http://localhost:8080/api/items";
 export default function AddItemPopup({ 
     onCloseNewItemPopup, 
     onClickAddItem
 } : { 
     onCloseNewItemPopup: () => void; 
-    onClickAddItem: (formData : Omit<Item, "id">) => void ;
+    onClickAddItem: (formData : Omit<Item, "item_id">) => void ;
 } ) {
-    const [newItemFormData, setNewItemFormData] = useState<Omit<Item, "id">>({
-        item_name: '',
+    const [newItemFormData, setNewItemFormData] = useState<Omit<Item, "item_id">>({
+        itemName: '',
         current_price: 0,
         size: '',
         stock_quantity: 0,
-        status: "Active"
+        reserved_quantity: 0,
+        status: 'AVAILABLE'
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -39,13 +42,13 @@ export default function AddItemPopup({
                     <button onClick={onCloseNewItemPopup} className="cursor-pointer"><X /></button>
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-2">
-                    <label htmlFor="item_name" className="text-sm font-medium text-gray-700">
+                    <label htmlFor="itemName" className="text-sm font-medium text-gray-700">
                         Item Name
                     </label>
                     <input 
                             type="text"
-                            name="item_name"
-                            value={newItemFormData?.item_name}
+                            name="itemName"
+                            value={newItemFormData?.itemName}
                             onChange={handleChange}
                             placeholder="Item Name"
                             className="border rounded px-3 py-2"

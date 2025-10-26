@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
+const API_URL = 'http://localhost:8080/api';
 
 import { Item } from "@/app/admin/types"
 import { getItems, postItem, searchItem, updateItem } from "@/libs/API/ItemsAPI";
@@ -13,11 +14,12 @@ export default function ItemManagementForm() {
     const [list, setList] = useState<Item[]>([]);
     const [activePopup, setActivePopup] = useState<"DETAIL" | "CONFIRM" | "ADD" | null>(null);
     const [selectedItem, setSelectedItem] = useState<Item>({
-        id: 0,                 
-        item_name: "",        
+        item_id: 0,                 
+        itemName: "",        
         current_price: 0,      
         size: "",               
         stock_quantity: 0,
+        reserved_quantity: 0,
         status: ""
     });
 
@@ -46,7 +48,7 @@ export default function ItemManagementForm() {
     }
 
     const getItem = (id : number) => {
-        const item = list.find(i => i.id === id);
+        const item = list.find(i => i.item_id === id);
         setSelectedItem(item!);
     }
 
@@ -63,7 +65,7 @@ export default function ItemManagementForm() {
         setActivePopup("ADD");
     }
 
-    const createItem = async (item : Omit<Item, "id">) => {
+    const createItem = async (item : Omit<Item, "item_id">) => {
         await postItem(item);
         const newList = await getItems();
         displayList(newList);
@@ -78,9 +80,9 @@ export default function ItemManagementForm() {
     }
 
     const search = async (query : string) => {
-        if (checkNULL(query)) {
-            return;
-        }
+        //if (checkNULL(query)) {
+          //  return;
+        //}
         const result = await searchItem(query);
         displayList(result);
     }
