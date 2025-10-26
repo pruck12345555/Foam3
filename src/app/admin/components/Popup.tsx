@@ -19,7 +19,7 @@ export default function Popup( {
     activePopup : "DETAIL" | "ADD" | "CONFIRM" | null;
     item : Item
     onClose : () => void;
-    onAddItem : (item: Omit<Item, "id">) => void;
+    onAddItem : (item: Omit<Item, "item_id">) => void;
     onUpdateItem : (item : Item) => void;
     onOpenConfirmPopup : () => void;
     onOpenLastItemDetailPopup : () => void;

@@ -65,6 +65,31 @@ export const postItem = async (itemData: Omit<Item, "item_id">): Promise<Item> =
   }
 };
 
+export const updateItem = async (itemData: Item): Promise<Item> => {
+    if (!itemData.item_id) {
+        throw new Error("Item ID is required for updating.");
+    }
+    try {
+        const response = await fetch(`${API_URL}/${itemData.item_id}`, { 
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(itemData), 
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`Failed to update item ${itemData.item_id}:`, response.status, errorText);
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const updatedItemFromServer: Item = await response.json();
+        console.log("Item updated successfully:", updatedItemFromServer);
+        return updatedItemFromServer; 
+    } catch (error) {
+        console.error("Error sending PUT request:", error);
+        throw error; 
+    }
+};
+
 // export async function getItems() {
 //         const res = await fetch("http://localhost:3000/admin/testItemData");
 //         const data = await res.json();
@@ -79,22 +104,22 @@ export const postItem = async (itemData: Omit<Item, "item_id">): Promise<Item> =
         //});
     //}
 
-export async function searchItema(query : string) {
-        const res = await fetch(`http://localhost:3000/admin/ItemManagement?search=${query}`);
-        const data = await res.json();
-        return data;
-    }
+// export async function searchItema(query : string) {
+//         const res = await fetch(`http://localhost:3000/admin/ItemManagement?search=${query}`);
+//         const data = await res.json();
+//         return data;
+//     }
 
-export async function updateItem(item: Item) {
-    const res = await fetch("http://localhost:3000/admin/testItemData", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(item),
-    });
-
-    const data = await res.json();
-    return data;
-}
+// export async function updateItem(item: Item) {
+//     const res = await fetch("http://localhost:3000/admin/testItemData", {
+//         method: "PUT",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(item),
+//     });
+// 
+//     const data = await res.json();
+//     return data;
+// }
 
 export async function deleteItemById() {
     

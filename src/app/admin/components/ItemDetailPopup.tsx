@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { Item } from "@/app/admin/types"
 
+// Base URL of your Spring Boot API for items
+const API_URL = "http://localhost:8080/api/items";
+
 export default function ItemDetailPopup({ 
         item, 
         onCloseItemDetailPopup, 
@@ -53,16 +56,16 @@ export default function ItemDetailPopup({
                 <div className="flex justify-end">
                     <button onClick={onCloseItemDetailPopup} className="cursor-pointer"><X /></button>
                 </div>
-                <h1>ID : {item.id}</h1>
+                <h1>ID : {item.item_id}</h1>
                 <h1>Status : {item.status}</h1>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-2">
-                    <label htmlFor="item_name" className="text-sm font-medium text-gray-700">
+                    <label htmlFor="itemName" className="text-sm font-medium text-gray-700">
                         Item Name
                     </label>
                     <input
                         type="text"
-                        name="item_name"
-                        value={ItemDetailFormData?.item_name}
+                        name="itemName"
+                        value={ItemDetailFormData?.itemName}
                         onChange={handleChange}
                         placeholder="Item Name"
                         className="border rounded px-3 py-2"
