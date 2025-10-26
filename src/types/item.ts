@@ -1,9 +1,9 @@
 export default interface Item {
-    item_id : number;
+    itemId : number;
     itemName : string;
-    current_price : number;
+    currentPrice : number;
     size : string;
-    stock_quantity : number;
-    reserved_quantity : number;
+    stockQuantity : number;
+    reservedQuantity : number;
     status : string;
 };

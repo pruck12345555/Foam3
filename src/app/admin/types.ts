@@ -1,7 +1,7 @@
 export interface ItemProps {
-    item_id: number;
+    itemId: number;
     title: string;
-    onClickDelete: (item_id: number) => void;
+    onClickDelete: (itemId: number) => void;
 }
 
 export interface ItemAddButtonProps {
@@ -10,11 +10,11 @@ export interface ItemAddButtonProps {
 
 //TODO Add reserve quantity
 export interface Item {
-    item_id: number,
+    itemId: number,
     itemName: string,
-    current_price: number,
+    currentPrice: number,
     size: string,
-    stock_quantity: number,
-    reserved_quantity: number,
+    stockQuantity: number,
+    reservedQuantity: number,
     status: string
 };

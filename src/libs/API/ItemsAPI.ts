@@ -35,7 +35,7 @@ export const getItems = async (): Promise<Item[]> => {
     }
 };
 
-export const postItem = async (itemData: Omit<Item, "item_id">): Promise<Item> => {
+export const postItem = async (itemData: Omit<Item, "itemId">): Promise<Item> => {
   try {
     const response = await fetch(API_URL, { // POST goes to the base /api/items URL
       method: 'POST',
@@ -66,11 +66,11 @@ export const postItem = async (itemData: Omit<Item, "item_id">): Promise<Item> =
 };
 
 export const updateItem = async (itemData: Item): Promise<Item> => {
-    if (!itemData.item_id) {
+    if (!itemData.itemId) {
         throw new Error("Item ID is required for updating.");
     }
     try {
-        const response = await fetch(`${API_URL}/${itemData.item_id}`, { 
+        const response = await fetch(`${API_URL}/${itemData.itemId}`, { 
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(itemData), 
@@ -78,7 +78,7 @@ export const updateItem = async (itemData: Item): Promise<Item> => {
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error(`Failed to update item ${itemData.item_id}:`, response.status, errorText);
+            console.error(`Failed to update item ${itemData.itemId}:`, response.status, errorText);
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const updatedItemFromServer: Item = await response.json();

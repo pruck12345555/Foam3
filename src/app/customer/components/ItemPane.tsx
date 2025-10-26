@@ -13,9 +13,9 @@ export default function ItemPane({ item } : {item : Item}) {
                 height={100}
                 className="mx-auto"
             />
-            <p>{item.item_name}</p>
-            <p>Price : {item.current_price} ฿</p>
-            <p>In stock : {item.stock_quantity}</p>
+            <p>{item.itemName}</p>
+            <p>Price : {item.currentPrice} ฿</p>
+            <p>In stock : {item.currentPrice}</p>
         </div>
     );
 }

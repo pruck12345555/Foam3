@@ -11,14 +11,14 @@ export default function AddItemPopup({
     onClickAddItem
 } : { 
     onCloseNewItemPopup: () => void; 
-    onClickAddItem: (formData : Omit<Item, "item_id">) => void ;
+    onClickAddItem: (formData : Omit<Item, "itemId">) => void ;
 } ) {
-    const [newItemFormData, setNewItemFormData] = useState<Omit<Item, "item_id">>({
+    const [newItemFormData, setNewItemFormData] = useState<Omit<Item, "itemId">>({
         itemName: '',
-        current_price: 0,
+        currentPrice: 0,
         size: '',
-        stock_quantity: 0,
-        reserved_quantity: 0,
+        stockQuantity: 0,
+        reservedQuantity: 0,
         status: 'AVAILABLE'
     })
 
@@ -57,13 +57,13 @@ export default function AddItemPopup({
 
                     <div className="flex gap-1">
                         <div className="flex flex-col">
-                            <label htmlFor="current_price" className="text-sm font-medium text-gray-700">
+                            <label htmlFor="currentPrice" className="text-sm font-medium text-gray-700">
                                 Price
                             </label>
                             <input
                                 type="number"
-                                name="current_price"
-                                value={newItemFormData?.current_price}
+                                name="currentPrice"
+                                value={newItemFormData?.currentPrice}
                                 onChange={handleChange}
                                 placeholder="Price"
                                 className="border rounded px-3 py-2 w-20"
@@ -90,13 +90,13 @@ export default function AddItemPopup({
                         </div>
 
                         <div className="flex flex-col">
-                            <label htmlFor="stock_quantity" className="text-sm font-medium text-gray-700">
+                            <label htmlFor="stockQuantity" className="text-sm font-medium text-gray-700">
                                 Stock
                             </label>
                             <input
                                 type="number"
-                                name="stock_quantity"
-                                value={newItemFormData?.stock_quantity}
+                                name="stockQuantity"
+                                value={newItemFormData?.stockQuantity}
                                 onChange={handleChange}
                                 placeholder="Stock"
                                 className="border rounded px-3 py-2 w-20"

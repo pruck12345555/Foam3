@@ -14,12 +14,12 @@ export default function ItemManagementForm() {
     const [list, setList] = useState<Item[]>([]);
     const [activePopup, setActivePopup] = useState<"DETAIL" | "CONFIRM" | "ADD" | null>(null);
     const [selectedItem, setSelectedItem] = useState<Item>({
-        item_id: 0,                 
+        itemId: 0,                 
         itemName: "",        
-        current_price: 0,      
+        currentPrice: 0,      
         size: "",               
-        stock_quantity: 0,
-        reserved_quantity: 0,
+        stockQuantity: 0,
+        reservedQuantity: 0,
         status: ""
     });
 
@@ -48,7 +48,7 @@ export default function ItemManagementForm() {
     }
 
     const getItem = (id : number) => {
-        const item = list.find(i => i.item_id === id);
+        const item = list.find(i => i.itemId === id);
         setSelectedItem(item!);
     }
 
@@ -65,7 +65,7 @@ export default function ItemManagementForm() {
         setActivePopup("ADD");
     }
 
-    const createItem = async (item : Omit<Item, "item_id">) => {
+    const createItem = async (item : Omit<Item, "itemId">) => {
         await postItem(item);
         const newList = await getItems();
         displayList(newList);

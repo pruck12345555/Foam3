@@ -56,7 +56,7 @@ export default function ItemDetailPopup({
                 <div className="flex justify-end">
                     <button onClick={onCloseItemDetailPopup} className="cursor-pointer"><X /></button>
                 </div>
-                <h1>ID : {item.item_id}</h1>
+                <h1>ID : {item.itemId}</h1>
                 <h1>Status : {item.status}</h1>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-2">
                     <label htmlFor="itemName" className="text-sm font-medium text-gray-700">
@@ -74,13 +74,13 @@ export default function ItemDetailPopup({
 
                     <div className="flex gap-1">
                         <div className="flex flex-col">
-                            <label htmlFor="current_price" className="text-sm font-medium text-gray-700">
+                            <label htmlFor="currentPrice" className="text-sm font-medium text-gray-700">
                                 Price
                             </label>
                             <input
                                 type="number"
-                                name="current_price"
-                                value={ItemDetailFormData?.current_price}
+                                name="currentPrice"
+                                value={ItemDetailFormData?.currentPrice}
                                 onChange={handleChange}
                                 placeholder="Price"
                                 className="border rounded px-3 py-2 w-20"
@@ -107,13 +107,13 @@ export default function ItemDetailPopup({
                         </div>
 
                         <div className="flex flex-col">
-                            <label htmlFor="stock_quantity" className="text-sm font-medium text-gray-700">
+                            <label htmlFor="stockQuantity" className="text-sm font-medium text-gray-700">
                                 Stock
                             </label>
                             <input
                                 type="number"
-                                name="stock_quantity"
-                                value={ItemDetailFormData?.stock_quantity}
+                                name="stockQuantity"
+                                value={ItemDetailFormData?.stockQuantity}
                                 onChange={handleChange}
                                 placeholder="Stock"
                                 className="border rounded px-3 py-2 w-20"
