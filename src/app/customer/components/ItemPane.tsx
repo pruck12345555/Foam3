@@ -3,9 +3,15 @@
 import Item from "@/types/Item";
 import Image from "next/image";
 
-export default function ItemPane({ item } : {item : Item}) {
+export default function ItemPane( { 
+    item,
+    onClickItem
+} : {
+    item : Item;
+    onClickItem : () => void;
+} ) {
     return (
-        <div className="outline-2 rounded-xl p-3">
+        <div className="outline-2 rounded-xl p-3" onClick={onClickItem}>
             <Image 
                 src="/box.svg"
                 alt="Box"

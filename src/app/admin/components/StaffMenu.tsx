@@ -4,7 +4,7 @@ import { Menu } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function Sidebar() {
+export default function StaffMenu() {
     const router = useRouter();
     const [collapsed, setCollapsed] = useState(true);
 
@@ -14,7 +14,7 @@ export default function Sidebar() {
 
     return (
         <div>
-            
+
             <div className="fixed top-4 left-4 z-50">
                 <Menu
                     onClick={() => setCollapsed(prev => !prev)}
@@ -22,7 +22,7 @@ export default function Sidebar() {
                 />
             </div>
 
-            
+
             <div
                 className={`fixed top-0 left-0 h-screen bg-blue-400 transition-all duration-300
                 ${collapsed ? '-translate-x-full' : 'translate-x-0 w-1/6'}`}
@@ -35,10 +35,10 @@ export default function Sidebar() {
                         Items Management
                     </button>
                     <button
-                        onClick={() => goTo('Test')}
+                        onClick={() => goTo('Orders')}
                         className="hover:bg-blue-500 p-1 cursor-pointer"
                     >
-                        Test
+                        Orders
                     </button>
                 </div>
             </div>

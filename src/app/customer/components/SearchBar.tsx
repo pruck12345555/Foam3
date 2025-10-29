@@ -1,11 +1,37 @@
 'use client';
 
-export default function SearchBar() {
+import { useState } from 'react';
+import { Search } from 'lucide-react';
+
+export default function SearchBar({ onSearch }: { onSearch?: (query: string) => void }) {
+    const [query, setQuery] = useState('');
+
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault(); // Prevent page reload
+        if (onSearch) onSearch(query.trim());
+    };
+
     return (
-        <div>
-            <div className="bg-white outline rounded-full">
-                <input placeholder="Search" className="w-full px-2 outline-none"/>
-            </div>
+        <div className="flex justify-center mt-3">
+            <form
+                onSubmit={handleSearch}
+                className="flex items-center bg-white rounded-full px-3 py-1 shadow-md w-full max-w-md"
+            >
+                <Search className="text-gray-500 mr-2" />
+                <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search..."
+                    className="flex-grow outline-none text-gray-700"
+                />
+                <button
+                    type="submit"
+                    className="ml-2 bg-blue-500 text-white px-3 py-1 rounded-full hover:bg-blue-600 transition"
+                >
+                    Go
+                </button>
+            </form>
         </div>
     );
 }
