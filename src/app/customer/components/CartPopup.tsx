@@ -38,9 +38,9 @@ export default function CartPopup({
                     {cart.length === 0 ? (<p className="grid-cols-3">No item in cart</p>) : 
                     (cart.map(({ item, amount }) => 
                             (
-                            <div key={item.id} className="border-2 rounded-xl p-3">
+                            <div key={item.itemId} className="border-2 rounded-xl p-3">
                                 <div className="flex justify-end mb-2">
-                                    <button onClick={() => onRemoveItemFromCart(item.id)} className="cursor-pointer"><X /></button>
+                                    <button onClick={() => onRemoveItemFromCart(item.itemId)} className="cursor-pointer"><X /></button>
                                 </div>
                                 <Image
                                     src="/box.svg"
@@ -49,10 +49,10 @@ export default function CartPopup({
                                     height={50}
                                     className="mx-auto"
                                 />
-                                <p>{item.item_name}</p>
+                                <p>{item.itemName}</p>
                                 <p>Size : {item.size}</p>
                                 <p>Amount : {amount}</p>
-                                <p>Total price : {item.current_price * amount}</p>
+                                <p>Total price : {item.currentPrice * amount}</p>
                             </div>
                             )
                         )
@@ -70,8 +70,8 @@ export default function CartPopup({
                                 className="border rounded px-3 py-2 w-full"
                                 required
                             />
-                        </form>
                         <button type="submit" className="bg-blue-400 p-2 px-4 rounded-xl shadow-2xl hover:shadow hover:bg-green-500">Create Order</button>
+                        </form>
                     </div>
                 )}
             </div>

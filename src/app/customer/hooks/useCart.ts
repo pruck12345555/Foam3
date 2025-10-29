@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Item from '@/types/Item';
+import Item from '@/types/item';
 import CartItem from '@/types/Cart';
 
 export default function useCart() {
@@ -20,7 +20,7 @@ export default function useCart() {
             return;
 
         setCart(prevCart => {
-            const existingItemIndex = prevCart.findIndex(c => c.item.id === item.id);
+            const existingItemIndex = prevCart.findIndex(c => c.item.itemId === item.itemId);
             const updatedCart = [...prevCart];
 
             if (existingItemIndex >= 0) {
@@ -39,13 +39,13 @@ export default function useCart() {
     const clearCart = () => setCart([]);
 
     const removeItemFromCart = (id: number) => {
-        setCart(prev => prev.filter(c => c.item.id !== id));
+        setCart(prev => prev.filter(c => c.item.itemId !== id));
     };
 
     const updateItemAmountInCart = (id: number, amount: number) => {
         setCart(prev => {
             return prev.map(cartItem =>
-                cartItem.item.id === id
+                cartItem.item.itemId === id
                     ? { ...cartItem, amount }
                     : cartItem                
             );

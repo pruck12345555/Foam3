@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import Item from "@/types/Item";
+import Item from "@/types/item";
 import { X } from "lucide-react";
 
 export default function ItemPopup( {
@@ -33,13 +33,13 @@ export default function ItemPopup( {
                 <div className="flex justify-end mb-2">
                     <button onClick={onCloseItemPopup} className="cursor-pointer"><X /></button>
                 </div>
-                <p>{item.item_name}</p>
-                <p>Price : {item.current_price} ฿</p>
-                <p>In stock : {item.stock_quantity}</p>
+                <p>{item.itemName}</p>
+                <p>Price : {item.currentPrice} ฿</p>
+                <p>In stock : {item.stockQuantity}</p>
                 <form onSubmit={handleSubmit} className="flex gap-2 mt-2">
                     <input
                         type="number"
-                        name="current_price"
+                        name="currentPrice"
                         value={formData}
                         onChange={handleChange}
                         placeholder="Price"

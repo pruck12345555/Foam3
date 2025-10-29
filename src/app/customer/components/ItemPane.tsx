@@ -1,6 +1,6 @@
 'use client';
 
-import Item from "@/types/Item";
+import Item from "@/types/item";
 import Image from "next/image";
 
 export default function ItemPane( { 
@@ -21,7 +21,7 @@ export default function ItemPane( {
             />
             <p>{item.itemName}</p>
             <p>Price : {item.currentPrice} ฿</p>
-            <p>In stock : {item.currentPrice}</p>
+            <p>In stock : {item.stockQuantity}</p>
         </div>
     );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import Item from "@/types/Item";
+import Item from "@/types/item";
 import ItemPane from "./ItemPane";
 
 export default function ItemGrid( { 
@@ -13,7 +13,7 @@ export default function ItemGrid( {
     return (
         <div className="grid grid-cols-5 gap-3 m-4">
             {items.map((item) => (
-                <ItemPane key={item.id} item={item} onClickItem={() => onClickItem(item.id)} />
+                <ItemPane key={item.itemId} item={item} onClickItem={() => onClickItem(item.itemId)} />
             ))}
         </div>
     );
