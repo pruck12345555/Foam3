@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 const API_URL = 'http://localhost:8080/api';
 
-import { Item } from "@/app/admin/types"
+import Item from "@/types/Item"
 import { getItems, postItem, searchItem, updateItem } from "@/libs/API/ItemsAPI";
 
 import ItemList from "../components/ItemList";
-import TopBar from "../components/TopBar";
-import Popup from "../components/Popup";
+import ItemManagementTopBar from "../components/ItemManagementTopBar";
+import ItemManagementPopup from "../components/ItemManagementPopup";
 
 export default function ItemManagementForm() {
     const [list, setList] = useState<Item[]>([]);
@@ -31,16 +31,16 @@ export default function ItemManagementForm() {
             } catch (err) {
                 console.error("Failed to fetch data");
             }
-        } 
+        }
 
         getData();
     }, []);
 
-    const displayList = (items : Item[]) => {
+    const displayList = (items: Item[]) => {
         setList(items)
     }
 
-    const checkNULL = (query : string) => {
+    const checkNULL = (query: string) => {
         if (query == null || query == '') {
             return true;
         }
@@ -56,7 +56,7 @@ export default function ItemManagementForm() {
         setActivePopup(null);
     }
 
-    const handleOpenItemDetailPopup = (id : number) => {
+    const handleOpenItemDetailPopup = (id: number) => {
         getItem(id);
         setActivePopup("DETAIL");
     }
@@ -72,7 +72,7 @@ export default function ItemManagementForm() {
         handleClosePopup();
     }
 
-    const updateItemDetail = async (item : Item) => {
+    const updateItemDetail = async (item: Item) => {
         await updateItem(item);
         const newList = await getItems();
         displayList(newList);
@@ -89,9 +89,9 @@ export default function ItemManagementForm() {
 
     return (
         <div>
-            <TopBar onSearch={search} onOpenNewItemPopup={handleOpenAddItemPopup}/>
-            <ItemList list={list} onClickItem={handleOpenItemDetailPopup}/>
-            <Popup
+            <ItemManagementTopBar onSearch={search} onOpenNewItemPopup={handleOpenAddItemPopup} />
+            <ItemList list={list} onClickItem={handleOpenItemDetailPopup} />
+            <ItemManagementPopup
                 activePopup={activePopup}
                 item={selectedItem}
                 onClose={handleClosePopup}

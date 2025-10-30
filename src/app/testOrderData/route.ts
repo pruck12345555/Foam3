@@ -1,14 +1,33 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const testOrderData = [{orderId : 1,
-    orderItemsId : 1,
-    orderDate : new Date(),
-    address : "",
-    trackingNo : "",
-    status : "",
-    paymentStatus : ""}];
+const testOrderData = [
+    {
+        orderId : 1,
+        orderDate : new Date(),
+        address : "",
+        trackingNo : "",
+        status : "Awaiting Payment",
+        paymentStatus : ""
+    }, 
+    {
+        orderId: 2,
+        orderDate: new Date(),
+        address: "",
+        trackingNo: "",
+        status: "Paid",
+        paymentStatus: ""
+    },
+    {
+        orderId: 3,
+        orderDate: new Date(),
+        address: "",
+        trackingNo: "",
+        status: "Ready to Ship",
+        paymentStatus: ""
+    }
+    ];
 
-var lastId = 1;
+let lastId = 3;
 
 export async function GET() {
     return NextResponse.json(testOrderData);

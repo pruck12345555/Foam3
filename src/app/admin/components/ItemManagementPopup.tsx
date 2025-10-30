@@ -5,9 +5,9 @@ import { useState } from "react";
 import AddItemPopup from "./AddItemPopup";
 import ItemDetailPopup from "./ItemDetailPopup";
 import ItemDiscontinueConfirmPopup from "./ItemDiscontinueConfirmPopup";
-import { Item } from "../types";
+import Item from "@/types/Item";
 
-export default function Popup( { 
+export default function ItemManagementPopup({
     activePopup,
     item,
     onClose,
@@ -25,7 +25,7 @@ export default function Popup( {
     onOpenLastItemDetailPopup : () => void;
 } ) {
 
-    const [discontinueAction, setDiscontinueAction] = useState<(() => void)>(() => {});
+    const [discontinueAction, setDiscontinueAction] = useState<(() => void)>(() => { });
 
     switch (activePopup) {
         case "ADD":

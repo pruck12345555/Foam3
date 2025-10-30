@@ -68,6 +68,7 @@ export default function CustomerPage() {
     
     const handleCheckout = async (cart : CartItem[], address : string) => {
         try {
+            //Create order and get ID
             const newOrder = await postOrder({
                 orderDate: new Date(),
                 address: address,
@@ -78,6 +79,7 @@ export default function CustomerPage() {
             const orderId = newOrder.orderId
 
             try {
+                //Assign ItemId to OrderId and send
                 const orderItems = cart.map(cart => ({
                     orderId : orderId,
                     itemId : cart.item.itemId,

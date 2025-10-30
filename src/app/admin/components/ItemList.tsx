@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Item } from "@/app/admin/types"
+import  Item  from "@/types/Item"
 
 export default function ItemList({ list, onClickItem } : { list : Item[]; onClickItem : (itemId : number) => void; }) {
     console.log("Checking keys in ItemList:", list.map(item => item.itemId));
@@ -20,6 +20,7 @@ export default function ItemList({ list, onClickItem } : { list : Item[]; onClic
                     <p>{item.currentPrice} ฿</p>
                     <p>Size : {item.size}</p>
                     <p>Stock : {item.stockQuantity}</p>
+                    <p>Reserved : {item.reservedQuantity}</p>
                     <p>Status : {item.status}</p>
                 </div>
             ))}

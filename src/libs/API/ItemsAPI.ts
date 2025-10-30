@@ -121,6 +121,15 @@ export const updateItem = async (itemData: Item): Promise<Item> => {
 //     return data;
 // }
 
+export async function updateItemReserve(itemId : number, amount : number) {
+    await fetch(`http://localhost:3000/item/${itemId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reserve_quantity: amount }),
+    });
+}
+
 export async function deleteItemById() {
-    
+    //const data = await res.json();
+    //return data;
 }

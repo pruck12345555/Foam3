@@ -6,7 +6,7 @@ const testItemData = [
         { itemId: 3, itemName: "Box C", currentPrice: 30, size: "L", stockQuantity: 30, status: "Active"},
     ];
 
-var lastId = 3;
+let lastId = 3;
 
 export async function GET() {
     return NextResponse.json(testItemData);

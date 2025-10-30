@@ -52,7 +52,7 @@ export async function searchOrderItems(query : string) {
     return data;
 }
 
-export async function updateItem(orderItems : Order_Items) {
+export async function updateOrderItems(orderItems : Order_Items) {
     const res = await fetch("http://localhost:3000/testOrderData", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

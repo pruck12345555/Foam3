@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { X } from "lucide-react";
-import { Item } from "@/app/admin/types"
+import  Item  from "@/types/item"
 
 // Base URL of your Spring Boot API for items
 const API_URL = "http://localhost:8080/api/items";

@@ -70,7 +70,7 @@ export async function searchOrder(query : string) {
     return data;
 }
 
-export async function updateItem(order : Order) {
+export async function updateOrder(order : Order) {
     const res = await fetch("http://localhost:3000/testOrderData", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -79,4 +79,20 @@ export async function updateItem(order : Order) {
 
     const data = await res.json();
     return data;
+}
+
+export async function updateOrderStatus(orderId : number, status : string) {
+    const res = await fetch(`http://localhost:3000/orders/${orderId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status : status }),
+    });
+}
+
+export async function updateOrderTrackingNo(orderId: number, trackingNo : string) {
+    const res = await fetch(`http://localhost:3000/orders/${orderId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ trackingNo : trackingNo }),
+    });
 }
