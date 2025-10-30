@@ -72,7 +72,8 @@ export default function CustomerPage() {
                 orderDate: new Date(),
                 address: address,
                 status: "Pending",
-                paymentStatus: "Unpaid" 
+                paymentStatus: "Unpaid", 
+                customerId: parseInt(localStorage.getItem("token") || "0")
             });
 
             const orderId = newOrder.orderId
