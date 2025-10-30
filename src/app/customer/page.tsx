@@ -13,6 +13,7 @@ import Popup from "./components/Popup";
 import CartButton from "./components/CartButton";
 import SearchBar from "./components/SearchBar";
 import CartItem from "@/types/Cart";
+import TopBar from "./components/TopBar";
 
 export default function CustomerPage() {
     const [list, setList] = useState<Item[]>([]);
@@ -111,6 +112,7 @@ export default function CustomerPage() {
 
     return (
         <div>
+            <TopBar/>
             <SearchBar
                 onSearch={search}
             />

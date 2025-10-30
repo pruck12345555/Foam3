@@ -29,7 +29,7 @@ export default function Home() {
       <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="rounded-full outline-2 px-3" placeholder="Username"></input>
       <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} className="rounded-full outline-2 px-3" placeholder="Password"></input>
       <div className="flex gap-2">
-        <button onClick={handleLogin} className="border-2 rounded-2xl py-1 px-3">Register</button>
+        <button onClick={() => router.push("/register")} className="border-2 rounded-2xl py-1 px-3">Register</button>
         <button onClick={handleLogin} className="border-2 rounded-2xl py-1 px-3">Login</button>
       </div>
     </div>
