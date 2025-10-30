@@ -82,17 +82,33 @@ export async function updateOrder(order : Order) {
 }
 
 export async function updateOrderStatus(orderId : number, status : string) {
-    const res = await fetch(`http://localhost:3000/orders/${orderId}`, {
+    const res = await fetch(`${API_URL}/${orderId}/status`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status : status }),
     });
 }
 
+// export async function updateOrderStatus(orderId : number, status : string) {
+//     const res = await fetch(`http://localhost:3000/orders/${orderId}/`, {
+//         method: "PATCH",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ status : status }),
+//     });
+// }
+
 export async function updateOrderTrackingNo(orderId: number, trackingNo : string) {
-    const res = await fetch(`http://localhost:3000/orders/${orderId}`, {
+    const res = await fetch(`${API_URL}/${orderId}/trackingNo`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ trackingNo : trackingNo }),
     });
 }
+
+// export async function updateOrderTrackingNo(orderId: number, trackingNo : string) {
+//     const res = await fetch(`http://localhost:3000/orders/${orderId}/`, {
+//         method: "PATCH",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ trackingNo : trackingNo }),
+//     });
+// }

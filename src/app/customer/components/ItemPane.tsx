@@ -19,15 +19,9 @@ export default function ItemPane( {
                 height={100}
                 className="mx-auto"
             />
-<<<<<<< HEAD
             <p>{item.itemName}</p>
             <p>Price : {item.currentPrice} ฿</p>
-            <p>In stock : {item.stockQuantity}</p>
-=======
-            <p>{item.item_name}</p>
-            <p>Price : {item.current_price} ฿</p>
-            <p>In stock : {item.stock_quantity - item.reserve_quantity}</p>
->>>>>>> refs/remotes/origin/develop
+            <p>In stock : {item.stockQuantity - item.reservedQuantity}</p>
         </div>
     );
 }

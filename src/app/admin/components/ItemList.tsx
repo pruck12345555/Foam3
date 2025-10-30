@@ -1,5 +1,5 @@
 import Image from "next/image";
-import  Item  from "@/types/Item"
+import  Item  from "@/types/item"
 
 export default function ItemList({ list, onClickItem } : { list : Item[]; onClickItem : (itemId : number) => void; }) {
     console.log("Checking keys in ItemList:", list.map(item => item.itemId));

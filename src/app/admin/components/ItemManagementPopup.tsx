@@ -5,7 +5,7 @@ import { useState } from "react";
 import AddItemPopup from "./AddItemPopup";
 import ItemDetailPopup from "./ItemDetailPopup";
 import ItemDiscontinueConfirmPopup from "./ItemDiscontinueConfirmPopup";
-import Item from "@/types/Item";
+import Item from "@/types/item";
 
 export default function ItemManagementPopup({
     activePopup,
