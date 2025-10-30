@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 
 import Item from "@/types/item"
-import Order from "@/types/Order";
-import Order_Items from "@/types/Order_Items";
 import useCart from "./hooks/useCart";
 import { getItems, searchItem } from "@/libs/API/ItemsAPI";
 import { postOrder } from "@/libs/API/OrderAPI";
