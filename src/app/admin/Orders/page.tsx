@@ -5,6 +5,7 @@ import { getOrders, updateOrderStatus, updateOrderTrackingNo } from "@/libs/API/
 import { useEffect, useState } from "react";
 
 import OrderList from "../components/OrderList";
+import OrdersTopBar from "../components/OrdersTopBar";
 
 export default function OrdersManagement() {
     const [list, setList] = useState<Order[]>([])
@@ -37,6 +38,7 @@ export default function OrdersManagement() {
 
     return (
         <div>
+            <OrdersTopBar/>
             <OrderList
                 list={list}
                 onReadyToShip={(id : number) => changeOrderStatus(id, "Ready to Ship")}
