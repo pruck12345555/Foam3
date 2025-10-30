@@ -14,7 +14,8 @@ export default function RegisterPage() {
         password : ""
     });
 
-    const handleRegister = () => {
+    const handleRegister = async (e: React.FormEvent) => {
+        e.preventDefault();
         register(formData);
     }
 
@@ -32,6 +33,7 @@ export default function RegisterPage() {
                 <div className="flex gap-2">
                     <input
                         type="text"
+                        name="firstName"
                         value={formData?.firstName}
                         onChange={handleChange}
                         className="rounded-full outline-2 px-3"
@@ -41,6 +43,7 @@ export default function RegisterPage() {
                     </input>
                     <input
                         type="text"
+                        name="lastName"
                         value={formData?.lastName}
                         onChange={handleChange}
                         className="rounded-full outline-2 px-3"
@@ -52,6 +55,7 @@ export default function RegisterPage() {
                 <div className="flex gap-2">
                     <input 
                         type="text"     
+                        name="username"
                         value={formData?.username} 
                         onChange={handleChange} 
                         className="rounded-full outline-2 px-3" 
@@ -61,6 +65,7 @@ export default function RegisterPage() {
                     </input>
                     <input 
                         type="text"     
+                        name="password"
                         value={formData?.password} 
                         onChange={handleChange} 
                         className="rounded-full outline-2 px-3" 
@@ -71,6 +76,7 @@ export default function RegisterPage() {
                 </div>
                 <input
                     type="text"
+                    name="email"
                     value={formData?.email}
                     onChange={handleChange}
                     className="rounded-full outline-2 px-3"
@@ -80,6 +86,7 @@ export default function RegisterPage() {
                 </input>
                 <input
                     type="text"
+                    name="phoneNumber"
                     value={formData?.phoneNumber}
                     onChange={handleChange}
                     className="rounded-full outline-2 px-3"
@@ -87,10 +94,10 @@ export default function RegisterPage() {
                     required
                 >
                 </input>
-            </form>
-            <div className="flex gap-2">
+                <div className="flex gap-2">
                 <button type="submit" className="border-2 rounded-2xl py-1 px-3">Register</button>
-            </div>
+                </div>
+            </form>
         </div>
     );
 }
