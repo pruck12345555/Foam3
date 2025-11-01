@@ -1,9 +1,9 @@
-import StaffMenu from "./components/StaffMenu";
+import CustomerMenu from "./components/CustomerMenu";
 
-export default function AdminLayout( { children } : { children: React.ReactNode } ) {
+export default function CustomerLayout( { children } : { children : React.ReactNode } ) {
     return (
         <div className="flex h-screen">
-            <StaffMenu />
+            <CustomerMenu />
             <main className="flex-1 overflow-auto">
                 {children}
             </main>

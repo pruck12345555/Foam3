@@ -12,7 +12,7 @@ export default function SearchBar({ onSearch }: { onSearch?: (query: string) => 
     };
 
     return (
-        <div className="flex justify-center mt-3">
+        <div className="flex flex-grow justify-center">
             <form
                 onSubmit={handleSearch}
                 className="flex items-center bg-white rounded-full px-3 py-1 shadow-md w-full max-w-md"

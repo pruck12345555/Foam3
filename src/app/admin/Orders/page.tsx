@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import OrderList from "../components/OrderList";
 import OrdersTopBar from "../components/OrdersTopBar";
+import StatusSelect from "../components/StatusSelect";
 
 export default function OrdersManagement() {
     const [list, setList] = useState<Order[]>([])
@@ -39,6 +40,7 @@ export default function OrdersManagement() {
     return (
         <div>
             <OrdersTopBar/>
+            <StatusSelect/>
             <OrderList
                 list={list}
                 onReadyToShip={(id : number) => changeOrderStatus(id, "Ready to Ship")}

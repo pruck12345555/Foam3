@@ -16,7 +16,7 @@ export default function Home() {
       return;
     }
 
-    localStorage.setItem("token", validationData.token);
+    localStorage.setItem("userId", String(validationData.userId));
     if (validationData.userType === "Customer") {
       router.push("/customer");
     } else if (validationData.userType === "Staff") {

@@ -24,6 +24,18 @@ export const getOrders = async (): Promise<Order[]> => {
 //     return data;
 // }
 
+// export async function postOrder(order : Omit<Order, "orderId">) {
+//     const res = await fetch("http://localhost:3000/testOrderData", {
+//         method : "POST",
+//         headers : { "Content-Type" : "application/json" },
+//         body : JSON.stringify(order),
+// 
+// export async function getOrdersById(id : number) {
+//     const res = await fetch(`http://localhost:3000/testOrderData?id=${id}`);
+//     const data = await res.json();
+//     return data;
+// }
+
 export const postOrder = async (orderData: Omit<Order, "orderId">): Promise<Order> => {
   try {
     const response = await fetch(API_URL, { // POST goes to the base /api/items URL
