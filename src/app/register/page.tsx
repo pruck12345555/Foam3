@@ -95,7 +95,7 @@ export default function RegisterPage() {
                 >
                 </input>
                 <div className="flex gap-2">
-                <button type="submit" className="border-2 rounded-2xl py-1 px-3">Register</button>
+                <button type="submit" className="border-2 rounded-2xl py-1 px-3">Confirm</button>
                 </div>
             </form>
         </div>

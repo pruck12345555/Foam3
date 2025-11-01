@@ -4,6 +4,5 @@ export default interface Order {
     address : string,
     trackingNo? : string,
     status : string,
-    paymentStatus : string,
     customerId : number
 }

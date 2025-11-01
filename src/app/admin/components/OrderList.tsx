@@ -31,7 +31,6 @@ export default function OrderList( {
                     <p>Date : {String(order.orderDate)}</p>
                     <p>Tracking No. : {order.trackingNo}</p>
                     <p>Status : {order.status}</p>
-                    <p>Payment Status : {order.paymentStatus}</p>
                     <div className="flex gap-2">
                         <button className="border-2 rounded-2xl p-2" onClick={() => onReadyToShip(order.orderId)}>Ready to Ship</button>
                         <div>

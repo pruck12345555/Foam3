@@ -21,6 +21,7 @@ export default function ItemPane( {
             />
             <p>{item.itemName}</p>
             <p>Price : {item.currentPrice} ฿</p>
+            <p>Size : {item.size}</p>
             <p>In stock : {item.stockQuantity - item.reservedQuantity}</p>
         </div>
     );

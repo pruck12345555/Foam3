@@ -71,8 +71,7 @@ export default function CustomerPage() {
             const newOrder = await postOrder({
                 orderDate: new Date(),
                 address: address,
-                status: "Pending",
-                paymentStatus: "Unpaid", 
+                status: "Created",
                 customerId: parseInt(localStorage.getItem("token") || "0")
             });
 
