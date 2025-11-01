@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 const API_URL = 'http://localhost:8080/api';
 
-import Item from "@/types/Item";
+import Item from "@/types/item";
 import { getItems, postItem, searchItem, updateItem } from "@/libs/API/ItemsAPI";
 
 import ItemList from "../components/ItemList";

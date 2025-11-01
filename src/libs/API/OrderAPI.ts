@@ -30,11 +30,11 @@ export const getOrders = async (): Promise<Order[]> => {
 //         headers : { "Content-Type" : "application/json" },
 //         body : JSON.stringify(order),
 // 
-// export async function getOrdersById(id : number) {
-//     const res = await fetch(`http://localhost:3000/testOrderData?id=${id}`);
-//     const data = await res.json();
-//     return data;
-// }
+export async function getOrdersById(id : number) {
+    const res = await fetch(`${API_URL}/orderId?id=${id}`);
+    const data = await res.json();
+    return data;
+}
 
 export const postOrder = async (orderData: Omit<Order, "orderId">): Promise<Order> => {
   try {

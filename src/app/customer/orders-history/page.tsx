@@ -42,6 +42,7 @@ export default function OrdersHistoryPage() {
     }
 
     const handleOpenInvoicePopup = (id : number) => {
+        getSelectedOrder(id);
         setActivePopup("INVOICE")
     }
 

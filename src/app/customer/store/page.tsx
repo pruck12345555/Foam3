@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import Item from "@/types/Item"
+import Item from "@/types/item"
 import useCart from "../hooks/useCart";
 import { getItems, searchItem } from "@/libs/API/ItemsAPI";
 import { postOrder } from "@/libs/API/OrderAPI";
@@ -18,12 +18,12 @@ export default function StorePage() {
     const [list, setList] = useState<Item[]>([]);
     const [activePopup, setActivePopup] = useState<"ITEM" | "CART" | null>(null);
     const [selectedItem, setSelectedItem] = useState<Item>({
-        id: 0,
-        item_name: "",
-        current_price: 0,
+        itemId: 0,
+        itemName: "",
+        currentPrice: 0,
         size: "",
-        stock_quantity: 0,
-        reserve_quantity: 0,
+        stockQuantity: 0,
+        reservedQuantity: 0,
         status: ""
     });
     const { cart, addItemToCart, removeItemFromCart } = useCart();
@@ -46,7 +46,7 @@ export default function StorePage() {
     }
 
     const getItem = (id: number) => {
-        const item = list.find(i => i.id === id);
+        const item = list.find(i => i.itemId === id);
         setSelectedItem(item!);
     }
 
@@ -80,9 +80,9 @@ export default function StorePage() {
                 //Assign ItemId to OrderId and send
                 const orderItems = cart.map(cart => ({
                     orderId: orderId,
-                    itemId: cart.item.id,
+                    itemId: cart.item.itemId,
                     quantity: cart.amount,
-                    totalPrice: cart.amount * cart.item.current_price
+                    totalPrice: cart.amount * cart.item.currentPrice
                 }));
 
                 await postOrderItems(orderItems);
