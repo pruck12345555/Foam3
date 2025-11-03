@@ -14,6 +14,7 @@ import StorePopup from "../components/StorePopup";
 import CartButton from "../components/CartButton";
 import CartItem from "@/types/Cart";
 import TopBar from "../components/StoreTopBar";
+import { clear } from "console";
 
 export default function StorePage() {
     const router = useRouter();
@@ -28,10 +29,9 @@ export default function StorePage() {
         reservedQuantity: 0,
         status: ""
     });
-    const { cart, addItemToCart, removeItemFromCart } = useCart();
+    const { cart, addItemToCart, removeItemFromCart, clearCart } = useCart();
 
-    useEffect(() => {
-        const getData = async () => {
+    const getData = async () => {
             try {
                 const data = await getItems();
                 displayList(data);
@@ -40,6 +40,7 @@ export default function StorePage() {
             }
         }
 
+    useEffect(() => {
         getData();
     }, []);
 
@@ -91,6 +92,10 @@ export default function StorePage() {
             } catch (err) {
                 console.error("Items sent failed :", err);
             }
+            
+            alert("Checkout successful!");
+            clearCart();
+            getData();
         } catch (err) {
             console.error("Checkout failed :", err);
         }

@@ -2,7 +2,7 @@
 
 import { Customer } from "@/types/User";
 import { useState, useEffect } from "react";
-import { changeProfileDetail, getCustomerDataById } from "@/libs/API/UserAPI";
+import { changeProfileDetail, getCustomerDataById, checkUsernameExist } from "@/libs/API/UserAPI";
 import OrdersTopBar from "../../admin/components/OrdersTopBar";
 
 export default function ProfileChangePage() {
@@ -15,8 +15,6 @@ export default function ProfileChangePage() {
     });
 
     useEffect(() => {
-        
-
         const fetchProfile = async () => {
             try {
                 // Fetch the user's current data
@@ -40,7 +38,30 @@ export default function ProfileChangePage() {
 
     const handleProfileUpdate = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        // Check Email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            alert("Email is in wrong format\nEmail Format : xxxxxx@xxxx.xxx");
+            return; 
+        }
+
+        // Check Phone number
+        const phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(formData.phoneNumber)) {
+            alert("Phone number is in wrong format\nPhone Number Format : 0123456789");
+            return; 
+        }
+
+        // Check username repeatition
+        const usernameExists = await checkUsernameExist(formData.username);
+        if (usernameExists) {
+            alert("Username already exists. Please choose a different username.");
+            return; 
+        }
+
         changeProfileDetail(formData);
+        alert("Profile updated successfully!");
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
