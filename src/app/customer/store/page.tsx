@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import Item from "@/types/Item"
 import useCart from "../hooks/useCart";
-import { getItems, searchItem } from "@/libs/API/ItemsAPI";
+import { getItems, getItemsAvailable, searchItem } from "@/libs/API/ItemsAPI";
 import { postOrder } from "@/libs/API/OrderAPI";
 import { postOrderItems } from "@/libs/API/Order_Items_API";
 import { useRouter } from "next/navigation";
@@ -33,7 +33,7 @@ export default function StorePage() {
 
     const getData = async () => {
             try {
-                const data = await getItems();
+                const data = await getItemsAvailable();
                 displayList(data);
             } catch (err) {
                 console.error("Failed to fetch data");

@@ -1,4 +1,4 @@
-import Item from "@/types/item";
+import Item from "@/types/Item";
 import ItemPopup from "./ItemPopup";
 import CartPopup from "./CartPopup";
 import CartItem from "@/types/Cart";

@@ -143,3 +143,20 @@ export async function getStockReport(): Promise<StockReportData> {
     }
     return response.json();
 }
+
+export const getItemsAvailable = async (): Promise<Item[]> => {
+    try {
+        // Fetch from the base API URL (e.g., GET http://localhost:8080/api/items)
+        const response = await fetch(`${API_URL}/available`); 
+        
+        if (!response.ok) {
+           const errorText = await response.text();
+           console.error("Failed to fetch items:", response.status, errorText);
+           throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    } catch (error) {
+        console.error("Error fetching items:", error);
+        throw error;
+    }
+};

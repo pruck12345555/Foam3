@@ -1,19 +1,20 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { getOrderItems } from "@/libs/API/Order_Items_API"; 
+import { getOrderItems, getOrderItemsResponse } from "@/libs/API/Order_Items_API"; 
 import Order_Items from "@/types/Order_Items"; 
+import Order_Items_Response from "@/types/Order_Items_Response";
 
 export default function OrderItemsList({ orderId }: { orderId: number }) {
     
-    const [items, setItems] = useState<Order_Items[]>([]);
+    const [items, setItems] = useState<Order_Items_Response[]>([]);
 
     useEffect(() => {
         if (!orderId) return;
 
         const fetchItems = async () => {
             try {
-                const data = await getOrderItems(orderId);
+                const data = await getOrderItemsResponse(orderId);
                 setItems(data);
             } catch (error) {
                 console.error(`Failed to fetch items for order ${orderId}:`, error);
@@ -31,7 +32,7 @@ export default function OrderItemsList({ orderId }: { orderId: number }) {
         <>
             {items.map(orderItem => (
                 <div key={orderItem.itemId}> 
-                    {orderItem.itemId} : {orderItem.quantity} : {orderItem.totalPrice}
+                    {orderItem.quantity} {orderItem.itemName} : {orderItem.totalPrice} Baht ({ (orderItem.totalPrice / orderItem.quantity).toFixed(2) } Baht each)
                 </div>
             ))}
         </>

@@ -1,4 +1,5 @@
 import Order_Items from "@/types/Order_Items"
+import Order_Items_Response from "@/types/Order_Items_Response";
 
 const API_URL = "http://localhost:8080/api/order_items"; // Base URL
 export const getOrder_Items = async (): Promise<Order_Items[]> => {
@@ -65,6 +66,16 @@ export async function updateOrderItems(orderItems : Order_Items) {
 
 export async function getOrderItems(orderId: number): Promise<Order_Items[]> {
     const res = await fetch(`${API_URL}/order/${orderId}`);
+    if (!res.ok) {
+        throw new Error('Failed to fetch order items for orderId: ' + orderId);
+    }
+    const data = await res.json();
+    return data;
+}
+
+export async function getOrderItemsResponse(orderId: number): Promise<Order_Items_Response[]> {  
+    const res = await fetch(`${API_URL}/itemName/${orderId}`);
+
     if (!res.ok) {
         throw new Error('Failed to fetch order items for orderId: ' + orderId);
     }
