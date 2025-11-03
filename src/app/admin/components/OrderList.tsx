@@ -2,6 +2,7 @@
 
 import Order from "@/types/Order";
 import { useState } from "react";
+import OrderItemsList from "../../customer/components/OrderItemsList";
 
 export default function OrderList( { 
     list,
@@ -48,6 +49,9 @@ export default function OrderList( {
                                 </div>
                                 <button className={`${order.status !== "Shipped" ? "hidden" : "border-2 rounded-2xl p-2"}`} onClick={() => onCompleteOrder(order.orderId)}>Completed</button>
                             </div>
+                        </div>
+                        <div className="flex-1 gap-3">
+                            <OrderItemsList orderId={order.orderId} />
                         </div>
                     </div>
                 ))}

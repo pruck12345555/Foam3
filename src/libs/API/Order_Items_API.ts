@@ -62,3 +62,12 @@ export async function updateOrderItems(orderItems : Order_Items) {
     const data = await res.json();
     return data;
 }
+
+export async function getOrderItems(orderId: number): Promise<Order_Items[]> {
+    const res = await fetch(`${API_URL}/order/${orderId}`);
+    if (!res.ok) {
+        throw new Error('Failed to fetch order items for orderId: ' + orderId);
+    }
+    const data = await res.json();
+    return data;
+}

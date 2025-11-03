@@ -14,12 +14,13 @@ export default function ProfileChangePage() {
         username : ""
     });
 
+    let oldUsername = "";
     useEffect(() => {
         const fetchProfile = async () => {
             try {
                 // Fetch the user's current data
                 const profileData = await getCustomerDataById(); 
-
+                oldUsername = profileData.username;
                 setFormData({
                     username: profileData.username,
                     firstName: profileData.firstName,
@@ -55,7 +56,7 @@ export default function ProfileChangePage() {
 
         // Check username repeatition
         const usernameExists = await checkUsernameExist(formData.username);
-        if (usernameExists) {
+        if (formData.username != oldUsername && usernameExists) {
             alert("Username already exists. Please choose a different username.");
             return; 
         }
