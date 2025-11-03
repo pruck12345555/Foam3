@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 
-import Item from "@/types/item"
+import Item from "@/types/Item"
 import useCart from "../hooks/useCart";
 import { getItems, searchItem } from "@/libs/API/ItemsAPI";
 import { postOrder } from "@/libs/API/OrderAPI";
 import { postOrderItems } from "@/libs/API/Order_Items_API";
+import { useRouter } from "next/navigation";
 
 import ItemGrid from "../components/ItemGrid";
 import StorePopup from "../components/StorePopup";
@@ -15,6 +16,7 @@ import CartItem from "@/types/Cart";
 import TopBar from "../components/StoreTopBar";
 
 export default function StorePage() {
+    const router = useRouter();
     const [list, setList] = useState<Item[]>([]);
     const [activePopup, setActivePopup] = useState<"ITEM" | "CART" | null>(null);
     const [selectedItem, setSelectedItem] = useState<Item>({
@@ -71,7 +73,7 @@ export default function StorePage() {
                 orderDate: new Date(),
                 customerId: Number(localStorage.getItem("userId")),
                 address: address,
-                status: "Pending",
+                status: "Created",
             });
 
             const orderId = newOrder.orderId
@@ -95,9 +97,9 @@ export default function StorePage() {
     }
 
     const checkNULL = (query: string) => {
-        if (query == null || query == '') {
-            return true;
-        }
+        //if (query == null || query == '') {
+        //    return true;
+        //}
         return false;
     }
 
@@ -110,7 +112,7 @@ export default function StorePage() {
     }
 
     const openUserMenu = () => {
-
+        router.push("/customer/profile-change");
     }
 
     return (

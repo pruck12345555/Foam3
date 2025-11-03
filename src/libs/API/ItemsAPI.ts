@@ -1,4 +1,5 @@
 import { Item } from "@/app/admin/types";
+import StockReportData from "@/types/StockReportData";
 
 const API_URL = "http://localhost:8080/api/items"; // Base URL
 
@@ -78,7 +79,7 @@ export const updateItem = async (itemData: Item): Promise<Item> => {
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error(`Failed to update item ${itemData.itemId}:`, response.status, errorText);
+            console.error("Failed to update item:", response.status, errorText);
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const updatedItemFromServer: Item = await response.json();
@@ -132,4 +133,13 @@ export async function updateItemReserve(itemId : number, amount : number) {
 export async function deleteItemById() {
     //const data = await res.json();
     //return data;
+}
+
+export async function getStockReport(): Promise<StockReportData> {
+    const response = await fetch(`${API_URL}/stockReport`);
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch stock report");
+    }
+    return response.json();
 }

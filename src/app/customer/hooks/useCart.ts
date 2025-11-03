@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Item from '@/types/item';
+import Item from '@/types/Item';
 import CartItem from '@/types/Cart';
 
 export default function useCart() {

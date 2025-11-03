@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import Item from "@/types/item";
+import Item from "@/types/Item";
 import { X } from "lucide-react";
 
 export default function ItemPopup( {
@@ -46,6 +46,8 @@ export default function ItemPopup( {
                         placeholder="Price"
                         className="border rounded px-3 py-2 w-20"
                         required
+                        min = {1}
+                        max = {item.stockQuantity - item.reservedQuantity}
                     />
                     <button type="submit" className="bg-blue-400 p-2 px-4 rounded-xl shadow-2xl hover:shadow hover:bg-blue-500">Add to cart</button>
                 </form>

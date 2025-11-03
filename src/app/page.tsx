@@ -20,7 +20,7 @@ export default function Home() {
     if (validationData.userType === "Customer") {
       router.push("/customer");
     } else if (validationData.userType === "Staff") {
-      router.push("/staff");
+      router.push("/admin");
     }
   };
 

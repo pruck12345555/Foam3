@@ -49,17 +49,6 @@ export default function OrderList( {
                                 <button className={`${order.status !== "Shipped" ? "hidden" : "border-2 rounded-2xl p-2"}`} onClick={() => onCompleteOrder(order.orderId)}>Completed</button>
                             </div>
                         </div>
-                        <div className="flex-1 gap-3">
-                            <div>
-                            Box A : 2
-                            </div>
-                            <div>
-                            Box B : 4
-                            </div>
-                            <div>
-                            Box C : 1
-                            </div>
-                        </div>
                     </div>
                 ))}
             </div>

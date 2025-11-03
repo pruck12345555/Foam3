@@ -1,4 +1,6 @@
 import Order from "@/types/Order"
+import ReportData from "@/types/SalesReportData";
+import StockReportData from "@/types/StockReportData";
 const API_URL = "http://localhost:8080/api/orders"; // Base URL
 
 export const getOrders = async (): Promise<Order[]> => {
@@ -117,6 +119,36 @@ export async function updateOrderTrackingNo(orderId: number, trackingNo : string
     });
 }
 
+export async function paidInvoice(orderId: number, receiptNo: string) {
+    const res = await fetch(`http://localhost:8080/api/invoices/paid/${orderId}`, { 
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        // Send a JSON object with a 'receiptNo' key
+        body: JSON.stringify({ receiptNo: receiptNo }), 
+    });
+
+    if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Failed to update receipt: ${errorText}`);
+    }
+    return res.json();
+}
+
+export async function getInvoiceByOrderId(orderId: number) : Promise<number> {
+    const res = await fetch(`http://localhost:8080/api/invoices/totalAmount/${orderId}`);
+    return await res.json();
+}
+
+export async function getSalesReport(startDate: string, endDate: string): Promise<ReportData> {
+    // Pass dates as query parameters
+    const response = await fetch(`${API_URL}/salesReport?startDate=${startDate}&endDate=${endDate}`);
+    
+    if (!response.ok) {
+        throw new Error("Failed to fetch sales report");
+    }
+    return response.json();
+}
+
 // export async function updateOrderTrackingNo(orderId: number, trackingNo : string) {
 //     const res = await fetch(`http://localhost:3000/orders/${orderId}/`, {
 //         method: "PATCH",
@@ -124,3 +156,4 @@ export async function updateOrderTrackingNo(orderId: number, trackingNo : string
 //         body: JSON.stringify({ trackingNo : trackingNo }),
 //     });
 // }
+

@@ -1,20 +1,41 @@
 'use client';
 
-import { useState } from "react";
-
+import { useState, useEffect } from "react"; // <-- Import hooks
 import { X } from "lucide-react";
 import Order from "@/types/Order";
 import Image from "next/image";
+import { getInvoiceByOrderId } from "@/libs/API/OrderAPI"; // <-- Import your API function
 
 export default function InvoicePopup({
     order,
     onCloseInvoicePopup,
+    onConfirmPayment,
 }: {
     onCloseInvoicePopup: () => void;
     order : Order;
+    onConfirmPayment: (orderId: number, receiptNo: string) => void;
 }) {
 
     const [formData, setFormData] = useState("");
+    const [totalAmount, setTotalAmount] = useState<number | null>(null);
+
+    useEffect(() => {
+        if (!order || order.orderId === 0) {
+            return;
+        }
+
+        const fetchTotal = async () => {
+            try {
+                const amount = await getInvoiceByOrderId(order.orderId);
+                setTotalAmount(amount); 
+            } catch (error) {
+                console.error(`Failed to fetch total for order ${order.orderId}:`, error);
+                setTotalAmount(0);
+            }
+        };
+
+        fetchTotal();
+    }, [order.orderId]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { value } = e.target;
@@ -23,6 +44,7 @@ export default function InvoicePopup({
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        onConfirmPayment(order.orderId, formData);
     }
 
     return (
@@ -31,7 +53,7 @@ export default function InvoicePopup({
                 <div className="flex justify-end mb-2">
                     <button onClick={onCloseInvoicePopup} className="cursor-pointer"><X /></button>
                 </div>
-                <p>Amount to paid : 100</p>
+                <p>Amount to paid : {totalAmount === null ? "Loading..." : `${totalAmount} ฿`}</p>
                 <p>Account No. : 064-393-1516 KPlus</p>
                 <Image 
                     src="/PromptPayQR.jpg"

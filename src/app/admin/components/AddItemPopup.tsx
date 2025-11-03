@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { X } from "lucide-react";
-import  Item  from "@/types/item"
+import  Item  from "@/types/Item"
 
 // Base URL of your Spring Boot API for items
 const API_URL = "http://localhost:8080/api/items";
@@ -16,7 +16,7 @@ export default function AddItemPopup({
     const [newItemFormData, setNewItemFormData] = useState<Omit<Item, "itemId">>({
         itemName: '',
         currentPrice: 0,
-        size: '',
+        size: 'S',
         stockQuantity: 0,
         reservedQuantity: 0,
         status: 'AVAILABLE'
@@ -63,6 +63,7 @@ export default function AddItemPopup({
                             <input
                                 type="number"
                                 name="currentPrice"
+                                min={0}
                                 value={newItemFormData?.currentPrice}
                                 onChange={handleChange}
                                 placeholder="Price"
@@ -97,6 +98,7 @@ export default function AddItemPopup({
                                 type="number"
                                 name="stockQuantity"
                                 value={newItemFormData?.stockQuantity}
+                                min={0}
                                 onChange={handleChange}
                                 placeholder="Stock"
                                 className="border rounded px-3 py-2 w-20"

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
-import  Item from "@/types/item"
+import  Item from "@/types/Item"
 
 // Base URL of your Spring Boot API for items
 const API_URL = "http://localhost:8080/api/items";
@@ -45,7 +45,7 @@ export default function ItemDetailPopup({
     }
 
     const handleRemove = () => {
-        const updatedItem = { ...ItemDetailFormData, status: "Discontinued"};
+        const updatedItem = { ...ItemDetailFormData, status: "DISCONTINUED" };
         setItemDetailFormData(updatedItem)
         onClickUpdateItem(updatedItem);
     }

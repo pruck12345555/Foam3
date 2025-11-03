@@ -1,6 +1,7 @@
 'use client';
 
 import Order from "@/types/Order";
+import InvoiceTotal from "./InvoiceTotal"; 
 
 export default function OrderList( { 
     list,
@@ -10,7 +11,6 @@ export default function OrderList( {
     onClickOrder : (id : number) => void;
 } ) {
 
-    //TODO : Pull total amount from invoice
     return (
         <div className="flex flex-col m-4 gap-2">
             {list.map(order => (
@@ -20,12 +20,10 @@ export default function OrderList( {
                     <p>Date : {String(order.orderDate)}</p>
                     <p>Tracking No. : {order.trackingNo}</p>
                     <p>Status : {order.status}</p>
-                    <p>Total Amount : 100</p>
-                    <button className={`${order.status === "Paid" ? "hidden" : "bg-blue-400 p-2 px-4 mt-2 rounded-xl shadow-2xl hover:shadow hover:bg-blue-500"}`} onClick={() => onClickOrder(order.orderId)}>Pay</button>
+                    <InvoiceTotal orderId={order.orderId} />
+                    <button className={`${order.status !== "Awaiting Payment" ? "hidden" : "bg-blue-400 p-2 px-4 mt-2 rounded-xl shadow-2xl hover:shadow hover:bg-blue-500"}`} onClick={() => onClickOrder(order.orderId)}>Pay</button>
                 </div>
-
             ))}
-            
         </div>
     );
 }

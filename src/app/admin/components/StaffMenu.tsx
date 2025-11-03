@@ -40,6 +40,18 @@ export default function StaffMenu() {
                     >
                         Orders
                     </button>
+                    <button
+                        onClick={() => goTo('report/sales-report')}
+                        className="hover:bg-blue-500 p-1 cursor-pointer"
+                    >
+                        Sales Report
+                    </button>
+                    <button
+                        onClick={() => goTo('report/stock-report')}
+                        className="hover:bg-blue-500 p-1 cursor-pointer"
+                    >
+                        Stock Report
+                    </button>
                 </div>
             </div>
         </div>
