@@ -45,6 +45,10 @@ export default function ItemDetailPopup({
     }
 
     const handleRemove = () => {
+        if(item.reservedQuantity > 0){
+            alert("Cannot discontinue item with reserved quantity greater than 0.");
+            return;
+        }
         const updatedItem = { ...ItemDetailFormData, status: "DISCONTINUED" };
         setItemDetailFormData(updatedItem)
         onClickUpdateItem(updatedItem);
@@ -83,6 +87,7 @@ export default function ItemDetailPopup({
                                 value={ItemDetailFormData?.currentPrice}
                                 onChange={handleChange}
                                 placeholder="Price"
+                                min = {1}
                                 className="border rounded px-3 py-2 w-20"
                                 required
                             />
@@ -116,6 +121,7 @@ export default function ItemDetailPopup({
                                 value={ItemDetailFormData?.stockQuantity}
                                 onChange={handleChange}
                                 placeholder="Stock"
+                                min = {0}
                                 className="border rounded px-3 py-2 w-20"
                                 required
                             />

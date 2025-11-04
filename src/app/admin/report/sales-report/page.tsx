@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { getSalesReport } from "@/libs/API/OrderAPI";
 import SalesReportData from "@/types/SalesReportData";
 
-
 export default function SalesReportingPage() {
+  const router = useRouter();
     const [report, setReport] = useState<SalesReportData | null>(null);
     const [startDate, setStartDate] = useState("2025-09-10");
   const [endDate, setEndDate] = useState("2025-10-10");
@@ -27,6 +28,10 @@ export default function SalesReportingPage() {
     e.preventDefault();
     fetchReport(); 
   };
+
+  const handleBack = () => {
+    router.back();
+  }
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-white">
@@ -71,7 +76,7 @@ export default function SalesReportingPage() {
           </p>
         </div>
 
-        <button className="border border-gray-600 rounded-full px-5 py-[2px] text-sm hover:bg-gray-100">
+        <button onClick={handleBack} className="border border-gray-600 rounded-full px-5 py-[2px] text-sm hover:bg-gray-100">
           Back
         </button>
       </div>

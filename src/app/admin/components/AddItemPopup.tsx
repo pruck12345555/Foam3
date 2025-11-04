@@ -63,7 +63,7 @@ export default function AddItemPopup({
                             <input
                                 type="number"
                                 name="currentPrice"
-                                min={0}
+                                min={1}
                                 value={newItemFormData?.currentPrice}
                                 onChange={handleChange}
                                 placeholder="Price"

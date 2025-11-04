@@ -2,9 +2,10 @@
 import { useState, useEffect } from "react";
 import { getStockReport } from "@/libs/API/ItemsAPI"; 
 import StockReportData from "@/types/StockReportData";
-
+import { useRouter } from "next/navigation";
 
 export default function StockReportingPage() {
+  const router = useRouter();
   const [report, setReport] = useState<StockReportData | null>(null);
   
   const fetchReport = async () => {
@@ -20,6 +21,10 @@ export default function StockReportingPage() {
   useEffect(() => {
     fetchReport();
   }, []);
+
+  const handleBack = () => {
+    router.back();
+  };
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-white">
@@ -45,7 +50,7 @@ export default function StockReportingPage() {
           </p>
         </div>
 
-        <button className="border border-gray-600 rounded-full px-5 py-[2px] text-sm hover:bg-gray-100">
+        <button className="border border-gray-600 rounded-full px-5 py-[2px] text-sm hover:bg-gray-100" onClick={handleBack}>
           Back
         </button>
       </div>
