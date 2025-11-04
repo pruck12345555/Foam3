@@ -1,8 +1,9 @@
 'use client';
 
 import Order from "@/types/Order";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import OrderItemsList from "../../customer/components/OrderItemsList";
+import { getReceiptNoByOrderId } from "@/libs/API/OrderAPI";
 
 function thaiTime(dateString: string | Date) {
     try {
@@ -49,6 +50,9 @@ export default function OrderList( {
                             <p>Date : {thaiTime(order.orderDate)}</p>
                             <p>Tracking No. : {order.trackingNo}</p>
                             <p>Status : {order.status}</p>
+                            {order.status !== "Awaiting Payment" && (
+                                <ReceiptDisplay orderId={order.orderId} />
+                            )}
                             <div className="flex gap-2">
                                 <button className={`${order.status !== "Paid" ? "hidden" : "border-2 rounded-2xl p-2"}`} onClick={() => onReadyToShip(order.orderId)}>Ready to Ship</button>
                                 <div>
@@ -57,7 +61,7 @@ export default function OrderList( {
                                         name="trackNo"
                                         value={trackNo}
                                         onChange={handleChange}
-                                        placeholder="Item Name"
+                                        placeholder="Tracking Number"
                                         className={`${order.status !== "Ready to Ship" ? "hidden" : "border rounded px-3 py-2"}`}
                                         required
                                     />
@@ -72,5 +76,32 @@ export default function OrderList( {
                     </div>
                 ))}
             </div>
+    );
+}
+
+function ReceiptDisplay({ orderId }: { orderId: number }) {
+    const [receiptNo, setReceiptNo] = useState<string>("Loading...");
+
+    useEffect(() => {
+        if (!orderId) {
+            setReceiptNo("No order ID");
+            return;
+        }
+
+        const fetchReceipt = async () => {
+            try {
+                const receipt = await getReceiptNoByOrderId(orderId);
+                setReceiptNo(String(receipt));
+            } catch (error) {
+                console.error(`Failed to fetch receipt for order ${orderId}:`, error);
+                setReceiptNo("Error");
+            }
+        };
+
+        fetchReceipt();
+    }, [orderId]);
+
+    return (
+        <p>Receipt No : {receiptNo}</p>
     );
 }

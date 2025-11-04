@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from "react"; // <-- Import hooks
+import { useState, useEffect } from "react"; 
 import { X } from "lucide-react";
 import Order from "@/types/Order";
 import Image from "next/image";
-import { getInvoiceByOrderId } from "@/libs/API/OrderAPI"; // <-- Import your API function
+import { getInvoiceByOrderId } from "@/libs/API/OrderAPI"; 
 
 export default function InvoicePopup({
     order,

@@ -139,6 +139,11 @@ export async function getInvoiceByOrderId(orderId: number) : Promise<number> {
     return await res.json();
 }
 
+export async function getReceiptNoByOrderId(orderId: number) : Promise<String> {
+    const res = await fetch(`http://localhost:8080/api/invoices/receiptNo/${orderId}`);
+    return await res.text();
+}
+
 export async function getSalesReport(startDate: string, endDate: string): Promise<ReportData> {
     // Pass dates as query parameters
     const response = await fetch(`${API_URL}/salesReport?startDate=${startDate}&endDate=${endDate}`);
