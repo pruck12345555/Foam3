@@ -134,6 +134,21 @@ export async function paidInvoice(orderId: number, receiptNo: string) {
     return res.json();
 }
 
+export async function unpaidInvoice(orderId: number, customerId: number) {
+    const res = await fetch(`http://localhost:8080/api/invoices/unpaid/${orderId}`, { 
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        // Send a JSON object with a 'receiptNo' key
+        body: JSON.stringify({ customerId: customerId }), 
+    });
+
+    if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Failed to update receipt: ${errorText}`);
+    }
+    return res.json();
+}
+
 export async function getInvoiceByOrderId(orderId: number) : Promise<number> {
     const res = await fetch(`http://localhost:8080/api/invoices/totalAmount/${orderId}`);
     return await res.json();

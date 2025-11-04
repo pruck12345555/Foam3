@@ -25,12 +25,14 @@ export default function OrderList( {
     list,
     onReadyToShip,
     onShipping,
-    onCompleteOrder
+    onCompleteOrder,
+    onAwaitingPayment
 } : {
     list : Order[];
     onReadyToShip : (id : number) => void;
     onShipping : (id : number, trackNo : string) => void;
     onCompleteOrder : (id : number) => void;
+    onAwaitingPayment : (id : number) => void;
 } ) {
     
     const [trackNo, setTrackNo] = useState("");
@@ -55,6 +57,7 @@ export default function OrderList( {
                             )}
                             <div className="flex gap-2">
                                 <button className={`${order.status !== "Paid" ? "hidden" : "border-2 rounded-2xl p-2"}`} onClick={() => onReadyToShip(order.orderId)}>Ready to Ship</button>
+                                <button className={`${order.status !== "Paid" ? "hidden" : "border-2 rounded-2xl p-2"}`} onClick={() => onAwaitingPayment(order.orderId)}>Awaiting Payment</button>
                                 <div>
                                     <input
                                         type="text"

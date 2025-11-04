@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Order from "@/types/Order"; 
-import { getOrders, updateOrderStatus, updateOrderTrackingNo } from "@/libs/API/OrderAPI";
+import { getOrders, unpaidInvoice, updateOrderStatus, updateOrderTrackingNo } from "@/libs/API/OrderAPI";
 import OrderList from "../components/OrderList";
 import OrdersTopBar from "../components/OrdersTopBar";
 import StatusSelect from "../components/StatusSelect";
@@ -31,6 +31,14 @@ export default function OrdersManagement() {
     const changeOrderStatus = async (id : number , status : string) => {
         await updateOrderStatus(id , status);
         // Optimistically update the list without a full refetch
+        setList(prevList => prevList.map(order => 
+            order.orderId === id ? { ...order, status: status } : order
+        ));
+    }
+
+    const checkNotPaid = async (id:number, status : string) => {
+        await updateOrderStatus(id , status);
+        unpaidInvoice(id, Number(localStorage.getItem("userId")));
         setList(prevList => prevList.map(order => 
             order.orderId === id ? { ...order, status: status } : order
         ));
@@ -65,6 +73,7 @@ export default function OrdersManagement() {
                 onReadyToShip={(id : number) => changeOrderStatus(id, "Ready to Ship")}
                 onShipping={(id : number, trackNo : string) => setTrackingNo(id, trackNo)}
                 onCompleteOrder={(id : number) => changeOrderStatus(id, "Completed")}
+                onAwaitingPayment={(id : number) => checkNotPaid(id, "Awaiting Payment")}
             />
         </div>
     );
