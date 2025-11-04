@@ -4,6 +4,22 @@ import Order from "@/types/Order";
 import InvoiceTotal from "./InvoiceTotal"; 
 import OrderItemsList from "./OrderItemsList";
 
+function thaiTime(dateString: string | Date) {
+    try {
+        const date = new Date(dateString); 
+        return date.toLocaleString('en-GB', {
+            timeZone: 'Asia/Bangkok',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    } catch (error) {
+        return String(dateString);
+    }
+}
+
 export default function OrderList( { 
     list,
     onClickOrder
@@ -19,7 +35,7 @@ export default function OrderList( {
                     <div className="flex-1">
                         <p>ID : {order.orderId}</p>
                         <p>Address : {order.address}</p>
-                        <p>Date : {String(order.orderDate)}</p>
+                        <p>Date : {thaiTime(order.orderDate)}</p>
                         <p>Tracking No. : {order.trackingNo}</p>
                         <p>Status : {order.status}</p>
                         <InvoiceTotal orderId={order.orderId} />
