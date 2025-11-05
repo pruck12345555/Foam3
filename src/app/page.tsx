@@ -1,15 +1,18 @@
 'use client';
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { use, useState } from "react";
 import { authUser } from "@/libs/API/UserAPI";
 import { LoginResponse } from "@/types/LoginResponse";
+import useCart from "./customer/hooks/useCart";
 
 export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
+  const { clearCart } = useCart();
   const handleLogin = async () => {
+    clearCart();
     const validationData = await authUser(username, password);
     if (!validationData.success) {
       alert("Invalid username or password");
