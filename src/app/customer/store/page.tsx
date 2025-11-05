@@ -132,6 +132,7 @@ export default function StorePage() {
             <ItemGrid
                 items={list}
                 onClickItem={handleOpenItemPopup}
+                cart={cart}
             />
             <StorePopup
                 activePopup={activePopup}

@@ -1,25 +1,34 @@
 'use client';
 
 import { useState } from "react";
-
+import CartItem from "@/types/Cart";
 import Item from "@/types/Item";
 import { X } from "lucide-react";
 
 export default function ItemPopup( {
     item,
     onCloseItemPopup,
-    sendData
+    sendData,
+    cart
 } : {
     item : Item
     onCloseItemPopup : () => void;
     sendData : (item : Item, amount : number) => void;
+    cart: CartItem[];
 } ) {
-
     const [formData, setFormData] = useState(0);
+    const itemInCart = cart.find(cartItem => cartItem.item.itemId === item.itemId);
+    const amountInCart = itemInCart ? itemInCart.amount : 0;
+    const remainingStock = item.stockQuantity - item.reservedQuantity - amountInCart;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { value } = e.target;
-        setFormData(Number(value));
+        let numValue = Number(value);
+
+        if (numValue > remainingStock) {
+            numValue = remainingStock;
+        }
+        setFormData(numValue);
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -36,7 +45,7 @@ export default function ItemPopup( {
                 <p>{item.itemName}</p>
                 <p>Price : {item.currentPrice} ฿</p>
                 <p>Size : {item.size}</p>
-                <p>In stock : {item.stockQuantity - item.reservedQuantity}</p>
+                <p>In stock : {remainingStock}</p>
                 <form onSubmit={handleSubmit} className="flex gap-2 mt-2">
                     <input
                         type="number"
@@ -47,7 +56,7 @@ export default function ItemPopup( {
                         className="border rounded px-3 py-2 w-20"
                         required
                         min = {1}
-                        max = {item.stockQuantity - item.reservedQuantity}
+                        max = {remainingStock}
                     />
                     <button type="submit" className="bg-blue-400 p-2 px-4 rounded-xl shadow-2xl hover:shadow hover:bg-blue-500">Add to cart</button>
                 </form>

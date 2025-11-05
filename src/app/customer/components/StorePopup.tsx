@@ -28,6 +28,7 @@ export default function StorePopup({
                     item={item}
                     onCloseItemPopup={onClose}
                     sendData={onAddItemToCart}
+                    cart={cart}
                 />
             );
 

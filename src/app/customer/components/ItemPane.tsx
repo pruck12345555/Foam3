@@ -1,15 +1,23 @@
 'use client';
 
-import Item from "@/types/item";
+import Item from "@/types/Item";
 import Image from "next/image";
+import CartItem from "@/types/Cart";
 
 export default function ItemPane( { 
     item,
-    onClickItem
+    onClickItem,
+    cart
 } : {
     item : Item;
     onClickItem : () => void;
+    cart: CartItem[];
 } ) {
+
+    const cartItem = cart.find(c => c.item.itemId === item.itemId);
+    const inCartAmount = cartItem ? cartItem.amount : 0;
+    const remainingStock = item.stockQuantity - item.reservedQuantity - inCartAmount;
+
     return (
         <div className="outline-2 rounded-xl p-3" onClick={onClickItem}>
             <Image 
@@ -22,7 +30,7 @@ export default function ItemPane( {
             <p>{item.itemName}</p>
             <p>Price : {item.currentPrice} ฿</p>
             <p>Size : {item.size}</p>
-            <p>In stock : {item.stockQuantity - item.reservedQuantity}</p>
+            <p>In stock : {remainingStock < 0 ? 0 : remainingStock}</p>
         </div>
     );
 }
