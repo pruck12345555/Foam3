@@ -4,11 +4,19 @@ import { useRouter } from "next/navigation";
 import { getSalesReport } from "@/libs/API/OrderAPI";
 import SalesReportData from "@/types/SalesReportData";
 
+const getTodayString = () => {
+    const today = new Date();
+    const offset = today.getTimezoneOffset();
+    const localToday = new Date(today.getTime() - (offset * 60 * 1000));
+    return localToday.toISOString().split('T')[0];
+};
+
 export default function SalesReportingPage() {
   const router = useRouter();
-    const [report, setReport] = useState<SalesReportData | null>(null);
-    const [startDate, setStartDate] = useState("2025-09-10");
-  const [endDate, setEndDate] = useState("2025-10-10");
+  const [report, setReport] = useState<SalesReportData | null>(null);
+  const today = getTodayString();
+  const [startDate, setStartDate] = useState("2025-09-10"); 
+  const [endDate, setEndDate] = useState(today); 
 
   const fetchReport = async () => {
     try {
@@ -44,12 +52,15 @@ export default function SalesReportingPage() {
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
             className="border border-gray-500 rounded px-2 py-[2px] w-[120px] text-sm"
+            max={endDate}
           />
           <input
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             className="border border-gray-500 rounded px-2 py-[2px] w-[120px] text-sm"
+            min={startDate}
+            max={today}
           />
           <button type="submit" className="border border-gray-600 rounded-full px-3 py-[2px] text-sm hover:bg-gray-100">
             Search

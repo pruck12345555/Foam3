@@ -66,6 +66,7 @@ export default function AddItemPopup({
                                 min={1}
                                 value={newItemFormData?.currentPrice}
                                 onChange={handleChange}
+                                step='0.01'
                                 placeholder="Price"
                                 className="border rounded px-3 py-2 w-20"
                                 required 
